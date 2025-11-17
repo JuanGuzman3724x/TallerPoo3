@@ -1,13 +1,13 @@
 package clases;
 
-public class Tarea {
-	private String id;
-	private String tipo;
-	private String descripcion;
-	private String estado;
-	private String responsable;
-	private String complejidad;
-	private String fecha;
+public abstract class Tarea {
+	protected String id;
+	protected String tipo;
+	protected String descripcion;
+	protected String estado;
+	protected String responsable;
+	protected String complejidad;
+	protected String fecha;
 	public Tarea(String id, String tipo, String descripcion, String estado, String responsable, String complejidad,
 			String fecha) {
 		this.id = id;
