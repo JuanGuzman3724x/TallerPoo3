@@ -1,9 +1,12 @@
 package clases;
 
+import java.util.ArrayList;
+
 public class Proyecto {
 	private String id;
 	private String nombre;
 	private String usuario;
+	private ArrayList<Tarea> tareas = new ArrayList<>();
 	public Proyecto(String id, String nombre, String usuario) {
 		super();
 		this.id = id;
@@ -18,6 +21,12 @@ public class Proyecto {
 	}
 	public String getUsuario() {
 		return usuario;
+	}
+	public void agregarTarea(Tarea t) {
+		tareas.add(t);
+	}
+	public void eliminarTarea(Tarea t) {
+		tareas.remove(t);
 	}
 	@Override
 	public String toString() {
