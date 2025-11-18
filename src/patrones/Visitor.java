@@ -6,8 +6,9 @@ import clases.TareaFeature;
 
 public interface Visitor {
 	
-	void aceptarDocumentacion(TareaDocumentacion documento);
-	void aceptarFeature(TareaFeature feature);
-	void aceptarBug(TareaBug bug);
+	
+	void aceptar(TareaDocumentacion documento);
+	void aceptar(TareaFeature feature);
+	void aceptar(TareaBug bug);
 
 }

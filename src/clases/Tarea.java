@@ -1,5 +1,5 @@
 package clases;
-
+import patrones.Visitor;
 public abstract class Tarea {
 	protected String id;
 	protected String tipo;
@@ -39,5 +39,6 @@ public abstract class Tarea {
 	public String getFecha() {
 		return fecha;
 	}
+	public abstract void aceptar(Visitor visitar);
 	
 }

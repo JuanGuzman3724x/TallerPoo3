@@ -22,6 +22,10 @@ public class Proyecto {
 	public String getUsuario() {
 		return usuario;
 	}
+	
+	public ArrayList<Tarea> getTareas() {
+		return tareas;
+	}
 	public void agregarTarea(Tarea t) {
 		tareas.add(t);
 	}
