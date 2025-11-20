@@ -19,5 +19,9 @@ public class Usuario {
 	public String getRol() {
 		return rol;
 	}
+	@Override
+	public String toString() {
+		return user +"," + password ;
+	}
 	
 }
