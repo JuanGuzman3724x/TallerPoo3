@@ -1,0 +1,11 @@
+Proyecto: PR001 - Plataforma de E-commerce (Resp: admin1)
+  T001 | Bug | Pendiente | colab1 | Alta | 2025-08-01
+  T002 | Feature | Pendiente | colab2 | Media | 2025-08-01
+  T003 | Documentacion | En progreso | colab1 | Baja | 2025-08-02
+Proyecto: PR002 - Sistema de Inventario (Resp: admin2)
+  T004 | Feature | Pendiente | colab2 | Alta | 2025-08-02
+  T005 | Bug | Pendiente | colab1 | Alta | 2025-08-03
+Proyecto: PR003 - Aplicación Móvil de Reservas (Resp: admin3)
+  T006 | Feature | Pendiente | colab1 | Media | 2025-08-04
+  T007 | Documentacion | Pendiente | colab2 | Baja | 2025-08-03
+

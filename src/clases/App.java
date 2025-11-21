@@ -1,7 +1,13 @@
 package clases;
+/**Nombre Juan Vicente Guzman Zepeda
+ * rut 21679842-2
+ * carrera ITI
+ * 
+ */
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import patrones.TareaFactory;
@@ -11,8 +17,11 @@ public class App {
 	
 	static Scanner scanner = new Scanner(System.in);
 	static SistemaImp sistema =SistemaImp.getInstancia();
-	
-	public static void menu() {
+	/**
+	 * menu principal
+	 * @throws IOException
+	 */
+	public static void menu() throws IOException {
 		System.out.println("Bienvenido");
 		System.out.println("usuario: ");
 		String user = scanner.nextLine();
@@ -27,6 +36,10 @@ public class App {
 		}
 		
 	}
+	/**
+	 * lector del archivo proyecto
+	 * @throws FileNotFoundException
+	 */
 	public static void lectorProyecto() throws FileNotFoundException {
 		try (Scanner scan = new Scanner(new File("proyectos.txt"))) {
 			while(scan.hasNextLine()) {
@@ -42,6 +55,10 @@ public class App {
 		}
 		
 	}
+	/**
+	 * lector archivo ususario
+	 * @throws FileNotFoundException
+	 */
 	public static void lectorUsuario() throws FileNotFoundException {
 		try (Scanner scan = new Scanner(new File("usuarios.txt"))) {
 			while(scan.hasNextLine()) {
@@ -56,6 +73,10 @@ public class App {
 		}
 		
 	}
+	/**
+	 * lector archivo tarea
+	 * @throws FileNotFoundException
+	 */
 	public static void lectorTareas() throws FileNotFoundException {
 		try (Scanner scan = new Scanner(new File("tareas.txt"))) {
 			while(scan.hasNextLine()) {
@@ -79,6 +100,10 @@ public class App {
 		}
 		
 	}
+	/**
+	 * menu usuario con sus metodos
+	 * @param sc
+	 */
 	public static void menuUsuario(Scanner sc) {
 		int opcion;
 		do {
@@ -102,7 +127,12 @@ public class App {
 		// TODO Auto-generated method stub
 		
 	}
-	public static void menuAdmin(Scanner sc) {
+	/**
+	 * menu admin  con sus metodos
+	 * @param sc
+	 * @throws IOException
+	 */
+	public static void menuAdmin(Scanner sc) throws IOException {
 		int opcion;
 	do {
 		System.out.println("Menu Admin:");
@@ -118,7 +148,7 @@ public class App {
 		break;
 		case 2:sistema.modificarProyecti();break;
 		case 3 :sistema.modificarTarea();break;
-		case 4:sistema.generarReporte();break;
+		case 4:sistema.generarReporte("reporte.txt");break;
 		
 		}
 	}while(opcion!=0);
@@ -129,12 +159,10 @@ public class App {
 		
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		lectorUsuario();
 	   lectorProyecto();
 		lectorTareas();
-		
-		
 		menu();
 
 	}

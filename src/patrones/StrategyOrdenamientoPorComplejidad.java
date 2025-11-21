@@ -15,7 +15,7 @@ public class StrategyOrdenamientoPorComplejidad implements Strategy{
 
             int j = i - 1;
 
-            // Insertar key en la posición correcta
+      +
             while (j >= 0 && valor(tarea.get(j).getComplejidad()) < valorAux) {
                 tarea.set(j + 1, tarea.get(j));
                 j--;

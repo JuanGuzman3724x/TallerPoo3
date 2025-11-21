@@ -3,7 +3,11 @@ package clases;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+
+
 import patrones.Visitor;
+
 
 
 
@@ -12,22 +16,36 @@ public class SistemaImp implements Sistema{
 	public ArrayList<Proyecto> proyecto = new ArrayList<>();
 	public ArrayList<Usuario> user = new ArrayList<>();
 	public ArrayList<Tarea> tareas = new ArrayList<>();
-	
+	/**
+	 * singleton
+	 * @return
+	 */
 	static  SistemaImp getInstancia() {
 		   if (instancia == null) {
 	            instancia = new SistemaImp();
 	        }
 	        return instancia;
 	}
-	
+	/**
+	 * agrega usuario
+	 * @param u
+	 */
 	public void agregarUsuario(Usuario u) {
 		user.add(u);
 	}
+	/**
+	 * agrega proyecto
+	 * @param p
+	 */
 	public void agregarProyecto(Proyecto p) {
 		proyecto.add(p);
 		
 	}
-	
+	/**busca el id del proyecto
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Proyecto getProyectoId(String id){
 		for (Proyecto p : proyecto ) {
 			if(p.getId().equals(id)) {
@@ -36,6 +54,11 @@ public class SistemaImp implements Sistema{
 		}
 		return null;
 	}
+	/** agrega las tareas al projecto
+	 * 
+	 * @param proyectoId
+	 * @param t
+	 */
 	public void agregarTareaProyecto(String proyectoId,Tarea t ) {
 		Proyecto p = getProyectoId(proyectoId);
 		if(p != null) {
@@ -56,41 +79,43 @@ public class SistemaImp implements Sistema{
 	}
 
 	
-
-	public boolean generarReporte(String filename) throws IOException {
-		if (filename == null || filename.trim().isEmpty()) 
-	        filename = "reporte.txt";
-
-	    FileWriter fw = null;
-	        fw = new FileWriter(filename);
-
-	        for (Proyecto p : proyecto) {
+/**
+ * Genera  el reporte 
+ * @param filename
+ * 
+ */
+	public void generarReporte(String filename){
+	    try (FileWriter fw = new FileWriter(filename)) {
+			for (Proyecto p : proyecto) {
 	            fw.write("Proyecto: " + p.getId() + " - " + p.getNombre() + 
 	                     " (Resp: " + p.getUsuario() + ")\n");
+	            for (Tarea t : p.getTareas()) {
+                    fw.write("  " + t.getId() + " | " + t.getTipo() + " | " + 
+                             t.getEstado() + " | " + t.getResponsable() + " | " + 
+                             t.getComplejidad() + " | " + t.getFecha() + "\n");
+                }
 
-	            if (p.getTareas().isEmpty()) {
-	                fw.write("  (Sin tareas)\n");
-	            } else {
-	                for (Tarea t : p.getTareas()) {
-	                    fw.write("  " + t.getId() + " | " + t.getTipo() + " | " + 
-	                             t.getEstado() + " | " + t.getResponsable() + " | " + 
-	                             t.getComplejidad() + " | " + t.getFecha() + "\n");
-	                }
-	            }
-	            fw.write("\n");}
-			return false;}
+
+	       
+	                	            }
+	            fw.write("\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 	public void modificarTarea() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void modificarProyecti() {
-		// TODO Auto-generated method stub
-		
-	}
 
+	}
+/**
+ * Mustra la lista completa
+ */
 	public void verListaCompleta() {
 		for(Proyecto proyec:proyecto) {
 			System.out.println(proyec);
@@ -139,6 +164,24 @@ public class SistemaImp implements Sistema{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void actualizarTarea() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aplicarVisitor() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void aplicarVisitorAUsuario(String usuario, Visitor visitor) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
