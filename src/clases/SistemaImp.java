@@ -1,9 +1,22 @@
 package clases;
+
+import java.util.ArrayList;
+
+
+
 public class SistemaImp implements Sistema{
+	private static SistemaImp instancia;
+	public ArrayList<Proyecto> proyecto = new ArrayList<>();
+	public ArrayList<Usuario> user = new ArrayList<>();
+	public ArrayList<Tarea> tareas = new ArrayList<>();
+	public  SistemaImp getInstancia() {
+		   if (instancia == null) {
+	            instancia = new SistemaImp();
+	        }
+	        return instancia;
+	}
 
 	@Override
-	
-
 	public void aplicarVisitor() {
 		// TODO Auto-generated method stub
 		

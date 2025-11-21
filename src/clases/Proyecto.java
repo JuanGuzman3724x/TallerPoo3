@@ -34,7 +34,7 @@ public class Proyecto {
 	}
 	@Override
 	public String toString() {
-		return id + "," + nombre +", "+ usuario +"," ;
+		return id + ";" + nombre +"; "+ usuario +";" ;
 		
 	}
 

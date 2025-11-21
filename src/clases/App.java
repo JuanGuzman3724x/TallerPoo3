@@ -4,12 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import patrones.TareaFactory;
+
 
 public class App {
 	
 	static Scanner scanner = new Scanner(System.in);
 	static SistemaImp sistema = new SistemaImp();
-	public void lectorProyecto() throws FileNotFoundException {
+	public void menu() {
+		System.out.println("Bienvenido");
+		System.out.println("usuario: ");
+		
+		
+	}
+	public static void lectorProyecto() throws FileNotFoundException {
 		try (Scanner scan = new Scanner(new File("proyectos.txt"))) {
 			while(scan.hasNextLine()) {
 				String linea = scan.nextLine();
@@ -22,7 +30,7 @@ public class App {
 		}
 		
 	}
-	public void lectorUsuario() throws FileNotFoundException {
+	public static void lectorUsuario() throws FileNotFoundException {
 		try (Scanner scan = new Scanner(new File("usuarios.txt"))) {
 			while(scan.hasNextLine()) {
 				String linea = scan.nextLine();
@@ -35,7 +43,7 @@ public class App {
 		}
 		
 	}
-	public void lectorTareas() throws FileNotFoundException {
+	public static void lectorTareas() throws FileNotFoundException {
 		try (Scanner scan = new Scanner(new File("tareas.txt"))) {
 			while(scan.hasNextLine()) {
 				String linea = scan.nextLine();
@@ -47,6 +55,8 @@ public class App {
 				String responsable = partes[4];
 				String complejidad = partes[5];
 				String fecha= partes[6];
+				TareaFactory tarea = new TareaFactory();
+				tarea.crearTarea(id, tipo, descripcion, estado, responsable, complejidad, fecha);
 				
 						
 			}
@@ -103,7 +113,10 @@ public class App {
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
+		lectorTareas();
+		lectorUsuario();
+		lectorProyecto();
 	}
 
 }
