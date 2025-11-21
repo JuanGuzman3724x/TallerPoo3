@@ -72,7 +72,6 @@ public class App {
 				Tarea tarea = TareaFactory.crearTarea(id, tipo, descripcion, estado, responsable, complejidad, fecha);
 				Proyecto proyecto = sistema.getProyectoId(idProjecto);
 				if(proyecto!= null) {
-					
 					sistema.agregarTareaProyecto(idProjecto, tarea);
 				}
 						

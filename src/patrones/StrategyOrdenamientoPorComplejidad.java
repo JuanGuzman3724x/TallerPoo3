@@ -9,52 +9,32 @@ public class StrategyOrdenamientoPorComplejidad implements Strategy{
 
 	@Override
 	public ArrayList<Tarea> ordenamiento(ArrayList<Tarea> tarea) {
-		for (int i = 0; i < tarea.size();i++) {
-			 int maxIdx = i;
-	            for (int j = i + 1; j < tarea.size(); j++) {
-	                Tarea a = tarea.get(j);
-	                Tarea b = tarea.get(maxIdx);
-	                int ia = impacto(a.getTipo());
-	                int ib = impacto(b.getTipo());
-	                if (ia > ib) {
-	                    maxIdx = j;
-	                } else if (ia == ib) {
-	                    // desempate por fecha (si ambas fechas no son null)
-	                    String fa = a.getFecha();
-	                    String fb = b.getFecha();
-	                    if (fa != null && fb != null) {
-	                        if (fa.compareTo(fb) < 0) { // fa más antigua -> mayor prioridad
-	                            maxIdx = j;
-	                        }
-	                    }
-	                }
-	            }
-	            if (maxIdx != i) {
-	                Tarea tmp = tarea.get(i);
-	                tarea.set(i, tarea.get(maxIdx));
-	                tarea.set(maxIdx, tmp);
-	            }
-	        }
-	        return tarea;
-	    }
-	
-	private int impacto(String tipo) {
-		if (tipo == null) {
-			
-		}
-		switch(tipo.toLowerCase()) {
-		case "bug":
-			return 3;
-		case "feature":
-			return  2;
-		case "documentacion":
-			return 1;
-		}
-		
-		
-		return 0;
-		
-	}
+		for (int i = 1; i < tarea.size(); i++) {
+            Tarea aux = tarea.get(i);
+            int valorAux = valor(aux.getComplejidad());
+
+            int j = i - 1;
+
+            // Insertar key en la posición correcta
+            while (j >= 0 && valor(tarea.get(j).getComplejidad()) < valorAux) {
+                tarea.set(j + 1, tarea.get(j));
+                j--;
+            }
+            tarea.set(j + 1, aux);
+        }
+
+        return tarea;
+    }
+
+    private int valor(String c) {
+        if (c == null) return 0;
+        switch (c.toUpperCase()) {
+            case "ALTA": return 3;
+            case "MEDIA": return 2;
+            case "BAJA": return 1;
+            default: return 0;
+        }
+    }
 	
 
 }
