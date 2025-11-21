@@ -6,7 +6,7 @@ import clases.TareaDocumentacion;
 import clases.TareaFeature;
 
 public class TareaFactory {
-	public Tarea crearTarea(String id, String tipo, String descripcion, String estado, String responsable, String complejidad,
+	public static Tarea crearTarea(String id, String tipo, String descripcion, String estado, String responsable, String complejidad,
 			String fecha) {
 		switch(tipo.toLowerCase()) {
 		case "bug":

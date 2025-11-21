@@ -42,7 +42,7 @@ public abstract class Tarea {
 	public abstract void aceptar(Visitor visitar);
 	@Override
 	public String toString() {
-		return "[" + tipo + "]" + id + ";" + descripcion + " ;"+ estado + ";" + responsable ;
+		return "[" + tipo + "]" + id + ";" + descripcion + " ;"+ estado + ";" + responsable+ "," + fecha ;
 	}
 	
 }

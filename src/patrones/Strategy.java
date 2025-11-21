@@ -1,8 +1,13 @@
 package patrones;
-
 import java.util.ArrayList;
 
+import clases.Tarea;
+
+
+
 public interface Strategy {
-	void ordenamiento(ArrayList<E>);
+	
+	
+ArrayList<Tarea> ordenamiento(ArrayList<Tarea> tarea);
 
 }

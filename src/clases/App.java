@@ -10,22 +10,34 @@ import patrones.TareaFactory;
 public class App {
 	
 	static Scanner scanner = new Scanner(System.in);
-	static SistemaImp sistema = new SistemaImp();
-	public void menu() {
+	static SistemaImp sistema =SistemaImp.getInstancia();
+	
+	public static void menu() {
 		System.out.println("Bienvenido");
 		System.out.println("usuario: ");
-		
+		String user = scanner.nextLine();
+		System.out.println("Contraseña: ");
+		String contra = scanner.nextLine();
+		Usuario usuario = sistema.acceder(user,contra);
+		if (usuario.getRol().equalsIgnoreCase("Administrador")) {
+			menuAdmin(scanner);
+		}
+		else if(usuario.getRol().equals("Colaborador")) {
+			menuUsuario(scanner);
+		}
 		
 	}
 	public static void lectorProyecto() throws FileNotFoundException {
 		try (Scanner scan = new Scanner(new File("proyectos.txt"))) {
 			while(scan.hasNextLine()) {
 				String linea = scan.nextLine();
-				String[] partes = linea.split("|");
+				String[] partes = linea.split("\\|");
 				String id= partes[0];
 				String nombre= partes[1];
 				String usuario = partes[2];
 				Proyecto proyecto = new Proyecto(id,nombre, usuario);
+				sistema.agregarProyecto(proyecto);
+			
 			}
 		}
 		
@@ -34,11 +46,12 @@ public class App {
 		try (Scanner scan = new Scanner(new File("usuarios.txt"))) {
 			while(scan.hasNextLine()) {
 				String linea = scan.nextLine();
-				String[] partes = linea.split("|");
+				String[] partes = linea.split("\\|");
 				String usuario = partes[0];
 				String contrasena = partes[1];
 				String rol = partes[2];
 				Usuario user = new Usuario(usuario, contrasena, rol);
+				sistema.agregarUsuario(user);
 			}
 		}
 		
@@ -47,23 +60,27 @@ public class App {
 		try (Scanner scan = new Scanner(new File("tareas.txt"))) {
 			while(scan.hasNextLine()) {
 				String linea = scan.nextLine();
-				String[] partes = linea.split("|");
-				String id = partes[0];
-				String tipo= partes[1];
-				String descripcion = partes[2];
-				String estado = partes[3];
-				String responsable = partes[4];
-				String complejidad = partes[5];
-				String fecha= partes[6];
-				TareaFactory tarea = new TareaFactory();
-				tarea.crearTarea(id, tipo, descripcion, estado, responsable, complejidad, fecha);
-				
+				String[] partes = linea.split("\\|");
+				String idProjecto= partes[0];
+				String id = partes[1];
+				String tipo= partes[2];
+				String descripcion = partes[3];
+				String estado = partes[4];
+				String responsable = partes[5];
+				String complejidad = partes[6];
+				String fecha= partes[7];
+				Tarea tarea = TareaFactory.crearTarea(id, tipo, descripcion, estado, responsable, complejidad, fecha);
+				Proyecto proyecto = sistema.getProyectoId(idProjecto);
+				if(proyecto!= null) {
+					
+					sistema.agregarTareaProyecto(idProjecto, tarea);
+				}
 						
 			}
 		}
 		
 	}
-	public void menuUsuario(Scanner sc) {
+	public static void menuUsuario(Scanner sc) {
 		int opcion;
 		do {
 			System.out.println("Menu usuario:");
@@ -75,7 +92,7 @@ public class App {
 			
 			opcion =sc.nextInt();
 			switch(opcion) {
-			case 1:sistema.verProyectos();break;
+			case 1:sistema.verListaCompleta();break;
 			case 2:sistema.verTareas();break;
 			case 3 :sistema.actualizarTarea();break;
 			case 4:sistema.aplicarVisitor();break;
@@ -114,9 +131,13 @@ public class App {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		lectorTareas();
 		lectorUsuario();
-		lectorProyecto();
+	   lectorProyecto();
+		lectorTareas();
+		
+		
+		menu();
+
 	}
 
 }

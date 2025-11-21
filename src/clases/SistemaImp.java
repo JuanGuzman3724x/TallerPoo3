@@ -9,16 +9,40 @@ public class SistemaImp implements Sistema{
 	public ArrayList<Proyecto> proyecto = new ArrayList<>();
 	public ArrayList<Usuario> user = new ArrayList<>();
 	public ArrayList<Tarea> tareas = new ArrayList<>();
-	public  SistemaImp getInstancia() {
+	
+	static  SistemaImp getInstancia() {
 		   if (instancia == null) {
 	            instancia = new SistemaImp();
 	        }
 	        return instancia;
 	}
+	
+	public void agregarUsuario(Usuario u) {
+		user.add(u);
+	}
+	public void agregarProyecto(Proyecto p) {
+		proyecto.add(p);
+		
+	}
+	
+	public Proyecto getProyectoId(String id){
+		for (Proyecto p : proyecto ) {
+			if(p.getId().equals(id)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	public void agregarTareaProyecto(String proyectoId,Tarea t ) {
+		Proyecto p = getProyectoId(proyectoId);
+		if(p != null) {
+			p.agregarTarea(t);
+		}
+		tareas.add(t);
+	}
 
 	@Override
 	public void aplicarVisitor() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -32,6 +56,7 @@ public class SistemaImp implements Sistema{
 		
 	}
 	public void verProyectos() {
+	
 		// TODO Auto-generated method stub
 		
 	}
@@ -54,9 +79,13 @@ public class SistemaImp implements Sistema{
 	}
 
 	public void verListaCompleta() {
-		// TODO Auto-generated method stub
+		for(Proyecto proyec:proyecto) {
+			System.out.println(proyec);
+			System.out.println(proyec.getTareas());
 		
-	}
+			}}
+		
+			
 
 	@Override
 	public void verProyecto() {
@@ -68,6 +97,16 @@ public class SistemaImp implements Sistema{
 	public void verTarea() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public Usuario acceder(String usuario,String password ) {
+		for(Usuario u:user) {
+			if(u.getUser().equals(usuario) && u.getPassword().equals(password)) {
+				return u;
+			}
+		}
+		return null;
 	}
 	
 

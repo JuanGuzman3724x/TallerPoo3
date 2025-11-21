@@ -26,8 +26,8 @@ public class Proyecto {
 	public ArrayList<Tarea> getTareas() {
 		return tareas;
 	}
-	public void agregarTarea(Tarea t) {
-		tareas.add(t);
+	public boolean agregarTarea(Tarea t) {
+		return tareas.add(t);
 	}
 	public void eliminarTarea(Tarea t) {
 		tareas.remove(t);
